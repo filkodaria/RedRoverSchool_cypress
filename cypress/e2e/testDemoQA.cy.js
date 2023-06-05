@@ -95,7 +95,7 @@ describe("Tile Forms", () => {
     cy.get("#item-0 span").contains("Practice Form").click();
   });
 
-  it.only("fill out the form", () => {
+  it("fill out the form", () => {
     cy.get(".card:nth-child(2)").click();
     cy.get(".element-group:nth-child(2)>div").click();
     cy.get("#firstName")
@@ -127,7 +127,18 @@ describe("Tile Forms", () => {
       .should("have.value", "Kyiv, Ukraine");
     cy.get("#submit").click();
     cy.get("#closeLargeModal").click();
+  });
 
+  it.only("verify fields color after validation", () => {
+    cy.get(".card:nth-child(2)").click();
+    cy.get(".element-group:nth-child(2)>div").click();
+    cy.get("#firstName")
+      .should("have.text", "")
+      .type("Daria{enter}")
+      .should("have.value", "Daria")
+      .should('have.css', 'border-color', "rgb(40, 167, 69)");
+    cy.get('#lastName')
+      .should('have.css', 'border-color', "rgb(220, 53, 69)");
   });
   
 });
