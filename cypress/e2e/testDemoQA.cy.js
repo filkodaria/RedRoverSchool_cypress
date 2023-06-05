@@ -1,5 +1,5 @@
 // HOME PAGE
-describe.skip("Menu", () => {
+describe("Menu", () => {
   const expectedMenuItemNames = [
     "Elements",
     "Forms",
@@ -53,7 +53,7 @@ describe.skip("Menu", () => {
 
 
 // TILE ELEMETS
-describe.skip("Tile Elements", () => {
+describe("Tile Elements", () => {
   beforeEach(() => {
     cy.visit("https://demoqa.com");
   });
@@ -95,15 +95,38 @@ describe("Tile Forms", () => {
     cy.get("#item-0 span").contains("Practice Form").click();
   });
 
-  it("fill out the section Name", () => {
-    cy.get("div.card-body h5").contains("Forms").click();
-    cy.get("#item-0 span").contains("Practice Form").click();
-    cy.get("#firstName").type("Daria");
-    cy.get("#lastName").type("Filko");
-    cy.get("#userEmail").type("testdf@df.mail");
+  it.only("fill out the form", () => {
+    cy.get(".card:nth-child(2)").click();
+    cy.get(".element-group:nth-child(2)>div").click();
+    cy.get("#firstName")
+      .should("have.text", "")
+      .type("Daria")
+      .should("have.value", "Daria");
+    cy.get("#lastName")
+      .should("have.text", "")
+      .type("Filko")
+      .should("have.value", "Filko");
+    cy.get("#userEmail")
+      .should("have.text", "")
+      .type("testdf@df.mail")
+      .should("have.value", "testdf@df.mail");
     cy.get("[for='gender-radio-2']").click();
-    cy.get("#userNumber").type("0123456789");
-    cy.get("#dateOfBirth").click();
+    cy.get("#userNumber")
+      .should("have.text", "")
+      .type("1234567890")
+      .should("have.value", "1234567890");
+    // cy.get("#dateOfBirth")
+    //   .type("15 Jan 1988");
+    // cy.get("#subjectsInput")
+    //   .type("Computer Science")
+    //   .should("have.value", "Computer Science");
+    cy.get("[for=hobbies-checkbox-1]").click();
+    cy.get("#currentAddress")
+      .should("have.text", "")
+      .type("Kyiv, Ukraine")
+      .should("have.value", "Kyiv, Ukraine");
+    cy.get("#submit").click();
+    cy.get("#closeLargeModal").click();
 
   });
   
