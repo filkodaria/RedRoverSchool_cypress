@@ -95,24 +95,28 @@ describe("Tile Forms", () => {
     cy.get("#item-0 span").contains("Practice Form").click();
   });
 
-  it("fill out the form", () => {
+  it.only("fill out the form", () => {
     cy.get(".card:nth-child(2)").click();
     cy.get(".element-group:nth-child(2)>div").click();
-    cy.get("#firstName")
-      .should("have.text", "")
-      .type("Daria")
-      .should("have.value", "Daria");
+    cy.get('#firstName')
+      .should('have.text', '')
+      .should('have.attr', 'placeholder', 'First Name')
+      .type('Daria')
+      .should('have.value', 'Daria');
     cy.get("#lastName")
       .should("have.text", "")
+      .should('have.attr', 'placeholder', 'Last Name')
       .type("Filko")
       .should("have.value", "Filko");
     cy.get("#userEmail")
       .should("have.text", "")
+      .should('have.attr', 'placeholder', 'name@example.com')
       .type("testdf@df.mail")
       .should("have.value", "testdf@df.mail");
     cy.get("[for='gender-radio-2']").click();
     cy.get("#userNumber")
       .should("have.text", "")
+      .should('have.attr', 'placeholder', 'Mobile Number')
       .type("1234567890")
       .should("have.value", "1234567890");
     // cy.get("#dateOfBirth")
@@ -123,13 +127,14 @@ describe("Tile Forms", () => {
     cy.get("[for=hobbies-checkbox-1]").click();
     cy.get("#currentAddress")
       .should("have.text", "")
+      .should('have.attr', 'placeholder', 'Current Address')
       .type("Kyiv, Ukraine")
       .should("have.value", "Kyiv, Ukraine");
     cy.get("#submit").click();
     cy.get("#closeLargeModal").click();
   });
 
-  it.only("verify fields color after validation", () => {
+  it("verify fields color after validation", () => {
     cy.get(".card:nth-child(2)").click();
     cy.get(".element-group:nth-child(2)>div").click();
     cy.get("#firstName")
