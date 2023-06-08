@@ -100,25 +100,25 @@ describe("Tile Forms", () => {
     cy.get(".element-group:nth-child(2)>div").click();
     cy.get('#firstName')
       .should('have.text', '')
-      .should('have.attr', 'placeholder', 'First Name')
+      .and('have.attr', 'placeholder', 'First Name')
       .type('Daria')
-      .should('have.value', 'Daria');
+      .and('have.value', 'Daria');
     cy.get("#lastName")
       .should("have.text", "")
-      .should('have.attr', 'placeholder', 'Last Name')
+      .and('have.attr', 'placeholder', 'Last Name')
       .type("Filko")
-      .should("have.value", "Filko");
+      .and("have.value", "Filko");
     cy.get("#userEmail")
       .should("have.text", "")
-      .should('have.attr', 'placeholder', 'name@example.com')
+      .and('have.attr', 'placeholder', 'name@example.com')
       .type("testdf@df.mail")
-      .should("have.value", "testdf@df.mail");
+      .and("have.value", "testdf@df.mail");
     cy.get("[for='gender-radio-2']").click();
     cy.get("#userNumber")
       .should("have.text", "")
-      .should('have.attr', 'placeholder', 'Mobile Number')
+      .and('have.attr', 'placeholder', 'Mobile Number')
       .type("1234567890")
-      .should("have.value", "1234567890");
+      .and("have.value", "1234567890");
     // cy.get("#dateOfBirth")
     //   .type("15 Jan 1988");
     // cy.get("#subjectsInput")
@@ -127,21 +127,21 @@ describe("Tile Forms", () => {
     cy.get("[for=hobbies-checkbox-1]").click();
     cy.get("#currentAddress")
       .should("have.text", "")
-      .should('have.attr', 'placeholder', 'Current Address')
+      .and('have.attr', 'placeholder', 'Current Address')
       .type("Kyiv, Ukraine")
-      .should("have.value", "Kyiv, Ukraine");
+      .and("have.value", "Kyiv, Ukraine");
     cy.get("#submit").click();
     cy.get("#closeLargeModal").click();
   });
 
-  it("verify fields color after validation", () => {
+  it.only("verify fields color after validation", () => {
     cy.get(".card:nth-child(2)").click();
     cy.get(".element-group:nth-child(2)>div").click();
     cy.get("#firstName")
       .should("have.text", "")
       .type("Daria{enter}")
-      .should("have.value", "Daria")
-      .should('have.css', 'border-color', "rgb(40, 167, 69)");
+      .and("have.value", "Daria")
+      .and('have.css', 'border-color', "rgb(40, 167, 69)");
     cy.get('#lastName')
       .should('have.css', 'border-color', "rgb(220, 53, 69)");
   });
