@@ -49,6 +49,23 @@ describe("Menu", () => {
       .should("deep.equal", expectedMenuItemNames);
   });
 
+  it('verify all cards styles', () => {
+    cy.get('div.card')
+      // .should('have.css', 'background', 'rgb(238, 238, 238)')
+      .and('have.css', 'height', '400px')
+      .and('have.css', 'border', '1px solid rgba(0, 0, 0, 0.125)')
+      .and('have.css', 'border-radius', '4px')
+  });
+
+  it('verify all cards icons', () => {
+    cy.get('div.avatar')
+      .should('have.css', 'color', 'rgb(1, 160, 224)')
+      .and('have.css', 'width', '100px')
+      .and('have.css', 'height', '100px')
+      .and('have.css', 'border', '1px solid rgb(187, 187, 187)')
+      .and('have.css', 'border-radius', '50%');
+  });
+
 });
 
 
@@ -95,7 +112,7 @@ describe("Tile Forms", () => {
     cy.get("#item-0 span").contains("Practice Form").click();
   });
 
-  it.only("fill out the form", () => {
+  it("fill out the form", () => {
     cy.get(".card:nth-child(2)").click();
     cy.get(".element-group:nth-child(2)>div").click();
     cy.get('#firstName')
@@ -134,7 +151,7 @@ describe("Tile Forms", () => {
     cy.get("#closeLargeModal").click();
   });
 
-  it.only("verify fields color after validation", () => {
+  it("verify fields color after validation", () => {
     cy.get(".card:nth-child(2)").click();
     cy.get(".element-group:nth-child(2)>div").click();
     cy.get("#firstName")
