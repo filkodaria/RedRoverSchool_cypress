@@ -164,3 +164,19 @@ describe("Tile Forms", () => {
   });
   
 });
+
+// TILE WIDGETS
+describe('Tile Widgets', () => {
+  beforeEach(() => {
+    cy.visit("https://demoqa.com");
+  });
+
+  it.only('verify disabled tab', () => {
+    cy.get('div.card-body').contains('Widgets').click();
+    cy.get('#item-5 span').contains('Tabs').click();
+    cy.get('nav #demo-tab-more')
+      .should('have.class', 'disabled')
+      .and('have.css', 'color', 'rgb(108, 117, 125)');
+  });
+
+});
