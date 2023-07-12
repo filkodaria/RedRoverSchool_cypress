@@ -51,7 +51,8 @@ describe("Menu", () => {
 
   it('verify all cards styles', () => {
     cy.get('div.card')
-      // .should('have.css', 'background', 'rgb(238, 238, 238)')
+      .should('have.css', 'background-color', 'rgb(238, 238, 238)')
+      .and('have.css', 'box-shadow', 'rgb(170, 170, 170) 5px 10px 10px 1px')
       .and('have.css', 'height', '400px')
       .and('have.css', 'border', '1px solid rgba(0, 0, 0, 0.125)')
       .and('have.css', 'border-radius', '4px')
@@ -69,33 +70,46 @@ describe("Menu", () => {
 });
 
 
-// TILE ELEMETS
-describe("Tile Elements", () => {
+// ELEMENTS TILE
+describe("Elements page", () => {
   beforeEach(() => {
     cy.visit("https://demoqa.com");
   });
 
-  it("clicking the tile Elements", () => {
+  it("check the url of Elements page", () => {
     cy.get("div.card-body h5").contains("Elements").click();
     cy.url().should("include", "/elements");
+  });
+
+  it("check the header of Elements page", () => {
+    cy.get("div.card-body h5").contains("Elements").click();
     cy.get("div.main-header").should("have.text", "Elements");
   });
 
-  it("clicking the dropdown Text Box", () => {
+});
+
+describe("Elements | Text Box", () => {
+  beforeEach(() => {
+    cy.visit("https://demoqa.com");
     cy.get("div.card-body h5").contains("Elements").click();
+  });
+
+  it.only("clicking the dropdown Text Box", () => {
     cy.get("#item-0 span").contains("Text Box").click();
+    cy.get("div.main-header").should("have.text", "Text Box");
   });
 
   it("fill out the field Full Name", () => {
-    cy.get("div.card-body h5").contains("Elements").click();
     cy.get("#item-0 span").contains("Text Box").click();
-    cy.get("#userName").type("Daria");
+    cy.get("#userName")
+      .type("Daria")
+      .should('have.value', 'Daria');;
   });
 
 });
 
 
-// TILE FORMS
+// FORMS TILE
 describe("Tile Forms", () => {
   beforeEach(() => {
     cy.visit("https://demoqa.com");
@@ -165,13 +179,13 @@ describe("Tile Forms", () => {
   
 });
 
-// TILE WIDGETS
+// WIDGETS TILE
 describe('Tile Widgets', () => {
   beforeEach(() => {
     cy.visit("https://demoqa.com");
   });
 
-  it.only('verify disabled tab', () => {
+  it('verify disabled tab', () => {
     cy.get('div.card-body').contains('Widgets').click();
     cy.get('#item-5 span').contains('Tabs').click();
     cy.get('nav #demo-tab-more')
