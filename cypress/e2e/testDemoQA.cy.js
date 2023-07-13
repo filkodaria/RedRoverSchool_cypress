@@ -86,6 +86,60 @@ describe("Elements page", () => {
     cy.get("div.main-header").should("have.text", "Elements");
   });
 
+  it("clicking Text Box item into dropdown list", () => {
+    cy.get("div.card-body h5").contains("Elements").click();
+    cy.get("#item-0 span").contains("Text Box").click();
+    cy.get("div.main-header").should("have.text", "Text Box");
+  });
+
+  it("clicking Check Box item into dropdown list", () => {
+    cy.get("div.card-body h5").contains("Elements").click();
+    cy.get('#item-1 span').contains('Check Box').click();
+    cy.get("div.main-header").should("have.text", "Check Box");  
+  });
+
+  it("clicking Radio Button item into dropdown list", () => {
+    cy.get("div.card-body h5").contains("Elements").click();
+    cy.get('#item-2 span').contains('Radio Button').click();
+    cy.get("div.main-header").should("have.text", "Radio Button");  
+  });
+
+  it("clicking Web Tables item into dropdown list", () => {
+    cy.get("div.card-body h5").contains("Elements").click();
+    cy.get('#item-3 span').contains('Web Tables').click();
+    cy.get("div.main-header").should("have.text", "Web Tables");  
+  });
+
+  it("clicking Buttons item into dropdown list", () => {
+    cy.get("div.card-body h5").contains("Elements").click();
+    cy.get('#item-4 span').contains('Buttons').click();
+    cy.get("div.main-header").should("have.text", "Buttons");  
+  });
+
+  it("clicking Links item into dropdown list", () => {
+    cy.get("div.card-body h5").contains("Elements").click();
+    cy.get('#item-5 span').contains('Links').click();
+    cy.get("div.main-header").should("have.text", "Links");  
+  });
+
+  it("clicking Broken Links - Images item into dropdown list", () => {
+    cy.get("div.card-body h5").contains("Elements").click();
+    cy.get('#item-6 span').contains('Broken Links - Images').click();
+    cy.get("div.main-header").should("have.text", "Broken Links - Images");  
+  });
+
+  it("clicking Upload and Download item into dropdown list", () => {
+    cy.get("div.card-body h5").contains("Elements").click();
+    cy.get('#item-7 span').contains('Upload and Download').click();
+    cy.get("div.main-header").should("have.text", "Upload and Download");  
+  });
+
+  it("clicking Dynamic Properties item into dropdown list", () => {
+    cy.get("div.card-body h5").contains("Elements").click();
+    cy.get('#item-8 span').contains('Dynamic Properties').click();
+    cy.get("div.main-header").should("have.text", "Dynamic Properties");  
+  });
+
 });
 
 
@@ -93,20 +147,39 @@ describe("Elements | Text Box", () => {
   beforeEach(() => {
     cy.visit("https://demoqa.com");
     cy.get("div.card-body h5").contains("Elements").click();
-  });
-
-  it("clicking the dropdown Text Box", () => {
     cy.get("#item-0 span").contains("Text Box").click();
-    cy.get("div.main-header").should("have.text", "Text Box");
   });
 
   it("fill out the field Full Name", () => {
-    cy.get("#item-0 span").contains("Text Box").click();
     cy.get("#userName")
       .type("Daria")
       .should('have.value', 'Daria')
       .clear()
       .should('have.value', '');
+  });
+
+});
+
+
+describe("Elements | Check Box", () => {
+  beforeEach(() => {
+    cy.visit("https://demoqa.com");
+    cy.get("div.card-body h5").contains("Elements").click();
+    cy.get("#item-1 span").contains("Check Box").click();
+  });
+
+  it("check the checkbox Home", () => {
+    cy.get("input#tree-node-home")
+      .check({force: true})
+      .should('be.checked');
+    cy.get('#result span:nth-child(1)')
+      .contains('selected')
+      .should('exist');
+    cy.get("input#tree-node-home")
+      .uncheck({force: true})
+      .should('not.be.checked');
+    cy.get('#result')
+      .should('not.exist');
   });
 
 });
@@ -128,7 +201,7 @@ describe("Forms page", () => {
     cy.get("div.main-header").should("have.text", "Forms");
   });
 
-  it("clicking the dropdown Practice Form", () => {
+  it("clicking Practice Form item into dropdown list", () => {
     cy.get("div.card-body h5").contains("Forms").click();
     cy.get("#item-0 span").contains("Practice Form").click();
     cy.get("div.main-header").should("have.text", "Practice Form");
@@ -281,5 +354,33 @@ describe('Widgets | Tabs', () => {
       .should('have.class', 'disabled')
       .and('have.css', 'color', 'rgb(108, 117, 125)');
   });
+
+});
+
+
+describe.only('Widgets | Select Menu', () => {
+  beforeEach(() => {
+    cy.visit("https://demoqa.com");
+    cy.get('div.card-body').contains('Widgets').click();
+    cy.get('#item-8 span').contains('Select Menu').click();
+  });
+
+  it("check value of dropdown item / select", () => {
+    cy.get("select#oldSelectMenu")
+      .select('Purple')
+      .should('have.value', '4');
+  });
+  
+  // it("check value of dropdown item / trigger", () => {
+  //   cy.get("select#oldSelectMenu")
+  //     .trigger('mousedown');
+  //   cy.wait(1000);
+  //   cy.get("select#oldSelectMenu")
+  //     .trigger('mouseup');
+  // });
+
+  
+
+
 
 });
