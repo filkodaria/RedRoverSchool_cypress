@@ -235,25 +235,43 @@ describe("Forms | Practice Form", () => {
       .and('have.attr', 'placeholder', 'name@example.com')
       .type("testdf@df.mail")
       .and("have.value", "testdf@df.mail");
-    cy.get("[for='gender-radio-2']").click();
+    cy.get("[for='gender-radio-2']")
+      .click();
     cy.get("#userNumber")
       .should("have.text", "")
       .and('have.attr', 'placeholder', 'Mobile Number')
       .type("1234567890")
       .and("have.value", "1234567890");
-    // cy.get("#dateOfBirth")
-    //   .type("15 Jan 1988");
-    // cy.get("#subjectsInput")
-    //   .type("Computer Science")
-    //   .should("have.value", "Computer Science");
-    cy.get("[for=hobbies-checkbox-1]").click();
+    cy.get("#dateOfBirthInput")
+      .click();
+    cy.get("select.react-datepicker__month-select")
+      .select('January');
+    cy.get("select.react-datepicker__year-select")
+      .select('1988');
+    cy.get('div.react-datepicker__day--015')
+      .click();
+    cy.get('#dateOfBirthInput')
+      .should('have.attr', 'value', '15 Jan 1988');
+    cy.get('#subjectsInput')
+      .should("have.text", "")
+      .type("Comp{enter}");
+    cy.get('[class$=value__label]')
+      .should("have.text", "Computer Science");
+    cy.get("[for=hobbies-checkbox-1]")
+      .click();
     cy.get("#currentAddress")
       .should("have.text", "")
       .and('have.attr', 'placeholder', 'Current Address')
       .type("Kyiv, Ukraine")
-      .and("have.value", "Kyiv, Ukraine");
-    cy.get("#submit").click();
-    cy.get("#closeLargeModal").click();
+      .should("have.value", "Kyiv, Ukraine");
+    cy.get("#submit")
+      .click();
+    cy.get('#example-modal-sizes-title-lg')
+      .should('contain', 'Thanks for');
+    cy.get("#closeLargeModal")
+      .click();
+    cy.get('#firstName')
+      .should('have.text', '')
   });
 
   it("verify fields color after validation", () => {
@@ -358,7 +376,7 @@ describe('Widgets | Tabs', () => {
 });
 
 
-describe.only('Widgets | Select Menu', () => {
+describe('Widgets | Select Menu', () => {
   beforeEach(() => {
     cy.visit("https://demoqa.com");
     cy.get('div.card-body').contains('Widgets').click();
@@ -379,7 +397,7 @@ describe.only('Widgets | Select Menu', () => {
   //     .trigger('mouseup');
   // });
 
-  
+
 
 
 
