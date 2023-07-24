@@ -217,7 +217,7 @@ describe("Forms | Practice Form", () => {
     cy.get(".element-group:nth-child(2)>div").click();
   });
 
-  it("fill out the form", () => {
+  it.only("fill out the form", () => {
     cy.get('div h5')
       .should('have.text', 'Student Registration Form');
     cy.get('#firstName')
@@ -264,6 +264,14 @@ describe("Forms | Practice Form", () => {
       .and('have.attr', 'placeholder', 'Current Address')
       .type("Kyiv, Ukraine")
       .should("have.value", "Kyiv, Ukraine");
+    cy.get('#state')
+      .type("raj{enter}");
+    cy.get('[class$=singleValue]')
+      .should("have.text", "Rajasthan");
+    cy.get('#city')
+      .type("jais{enter}");
+    cy.get('#city [class$=singleValue]')
+      .should("have.text", "Jaiselmer");
     cy.get("#submit")
       .click();
     cy.get('#example-modal-sizes-title-lg')
